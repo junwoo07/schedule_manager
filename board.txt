@@ -1,0 +1,10 @@
+MON | TUE | WED | THU | FRI
+1 | g | n | g | n | g
+2 | g | n | g | n | g
+3 | g | n | g | n | g
+4 | g | n | g | n | g
+5 | g | n | g | n | g
+6 | g | n | g | n | g
+7 | g | n | g | n | g
+8 | g | n | g | n | g
+9 | g | n | g | n | g
