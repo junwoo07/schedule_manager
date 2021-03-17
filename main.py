@@ -5,11 +5,19 @@ import webbrowser
 import numpy as np
 
 
-def save() :
-  with open("palette.txt",'w') as data :
-    for i in paletteboard.get()[:-1] :
-      data.write(i[0]+" | "+i[1]+"\n")
-    data.write(paletteboard.get()[-1][0]+" | "+paletteboard.get()[-1][1])
+def save(event=None) :
+  if event == None :
+    with open("palette.txt",'w') as data :
+      for i in paletteboard.get()[:-1] :
+        data.write(i[0]+" | "+i[1]+"\n")
+      data.write(paletteboard.get()[-1][0]+" | "+paletteboard.get()[-1][1])
+      print("saved")
+  elif event.state == 12 :
+    with open("palette.txt",'w') as data :
+      for i in paletteboard.get()[:-1] :
+        data.write(i[0]+" | "+i[1]+"\n")
+      data.write(paletteboard.get()[-1][0]+" | "+paletteboard.get()[-1][1])
+      print("saved")
 
 Chrome_Path = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s"
 
@@ -91,6 +99,7 @@ for i in palette.keys() :
   paletteboard.add([i,palette[i]])
 
 Button(window,text="Save",command=save).place(width=60,height=30)
+window.bind("<s>",save)
 
 
 window.mainloop()
