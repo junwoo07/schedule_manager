@@ -4,6 +4,15 @@ import tk_tools as tools
 import webbrowser
 import numpy as np
 
+
+def save() :
+  with open("palette.txt",'w') as data :
+    for i in paletteboard.get()[:-1] :
+      data.write(i[0]+" | "+i[1]+"\n")
+    data.write(paletteboard.get()[-1][0]+" | "+paletteboard.get()[-1][1])
+
+Chrome_Path = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s"
+
 window = Tk()
 window.title("schedule_manager")
 window.geometry('900x500')
@@ -52,12 +61,14 @@ class GateWay() :
     palette = {}
     for i in paletteboard.get() :
       palette[i[0]] = i[1]
-    print(palette)
-    webbrowser.open_new_tab(palette[gateways[self.i][self.j].get()])
+    if not self.validating() :
+      gateways[self.i][self.j].current(0)
+    webbrowser.get(Chrome_Path).open_new_tab(palette[gateways[self.i][self.j].get()])
 
 for i in range(len(board[0])) :
   gateways.append([])
   colheaderentrys.append(Entry(window,text=colheader[i],relief="groove"))
+  colheaderentrys[i].insert(0,colheader[i])
   colheaderentrys[i].place(x=i*90+60,y=0,width=90,height=30)
   for j in range(len(rowheader)) :
     GateWay(i,j)
@@ -79,6 +90,7 @@ Button(window,text="AddOption",command=addoption).place(x=i*90+465,y=0)
 for i in palette.keys() :
   paletteboard.add([i,palette[i]])
 
+Button(window,text="Save",command=save).place(width=60,height=30)
 
 
 window.mainloop()
