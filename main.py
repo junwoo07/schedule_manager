@@ -5,13 +5,57 @@ from tkinter import ttk
 import tk_tools as tools
 import webbrowser
 import numpy as np
+import sys
+import os
+import os.path
+
+login_window = Tk()
+login_window.title("LogIn")
+login_window.resizable(False,False)
+login_window.geometry("200x50")
+
+userid = ""
+
+def exitlogin() :
+  login_window.destroy()
+  login_window.quit()
+  sys.exit()
+
+def submitcommand(event=None) :
+  global userid
+  userid = identry.get()
+  if os.path.isdir(f'{userid}') :
+    login_window.destroy()
+    login_window.quit()
+  else :
+    ask = messagebox.askokcancel(title="There is no directory",message="Will you make new id?")
+    if ask :
+      os.mkdir(f'{userid}')
+      with open(f"{userid}\\palette.dat",'w') as dw :
+        with open("Default\\palette.dat",'r') as da :
+          dw.write(da.read())
+      with open(f"{userid}\\board.dat",'w') as dw :
+        with open("Default\\board.dat",'r') as da :
+          dw.write(da.read())
+      login_window.destroy()
+      login_window.quit()
+
+identry = ttk.Combobox(login_window,values=list(filter(lambda x : not '.' in x,os.listdir())))
+identry.bind("<Return>",submitcommand)
+submit = Button(text="Submit",command=submitcommand)
+identry.pack()
+submit.pack()
+
+login_window.protocol("WM_DELETE_WINDOW",exitlogin)
+login_window.mainloop()
+
 
 def rowsave() :
-  with open("palette.dat",'w') as data :
+  with open(f"{userid}\\palette.dat",'w') as data :
     for i in paletteboard.get()[:-1] :
       data.write(i[0]+" | "+i[1]+"\n")
     data.write(paletteboard.get()[-1][0]+" | "+paletteboard.get()[-1][1])
-  with open("board.dat","w") as data :
+  with open(f"{userid}\\board.dat","w") as data :
     for i in colheaderentrys[:-1] :
       data.write(i.get()+" | ")
     data.write(colheaderentrys[-1].get())
@@ -42,12 +86,12 @@ rowheader = []
 colheader = []
 board = []
 palette = {}
-with open("palette.dat") as data :
+with open(f"{userid}\\palette.dat") as data :
   temp = data.read().splitlines()
   for i in temp :
     p = i.split(" | ")
     palette[p[0]] = p[1]
-with open("board.dat") as data :
+with open(f"{userid}\\board.dat") as data :
   temp = data.read().splitlines()
   colheader = temp[0].split(" | ")
   temp = temp[1:]
@@ -113,7 +157,7 @@ Button(window,text="Save",command=save).place(width=60,height=30)
 window.bind("<s>",save)
 
 def quitevent() :
-  ask = messagebox.askyesnocancel(title="Wait!", message="Will you save it?")
+  ask = messagebox.askyesnocancel(title="It's not Saved!",message="Will you Save it?",icon='warning')
   if ask == True :
     save()
     window.destroy()
