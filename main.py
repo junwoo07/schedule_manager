@@ -1,4 +1,5 @@
 import tkinter
+from tkinter import messagebox
 from tkinter import *
 from tkinter import ttk
 import tk_tools as tools
@@ -37,12 +38,15 @@ colheader = []
 board = []
 palette = {}
 
+rowheader = []
+colheader = []
+board = []
+palette = {}
 with open("palette.dat") as data :
   temp = data.read().splitlines()
   for i in temp :
     p = i.split(" | ")
     palette[p[0]] = p[1]
-
 with open("board.dat") as data :
   temp = data.read().splitlines()
   colheader = temp[0].split(" | ")
@@ -109,16 +113,14 @@ Button(window,text="Save",command=save).place(width=60,height=30)
 window.bind("<s>",save)
 
 def quitevent() :
-  try :
-    ask = tkinter.messagebox.askyesnocancel(title="It is Not Saved!", message="Do you want save it?")
-    print(ask)
-  except Exception as e :
-    print(e)
-  finally :
+  ask = messagebox.askyesnocancel(title="Wait!", message="Will you save it?")
+  if ask == True :
+    save()
     window.destroy()
     window.quit()
-
-
+  elif ask == False :
+    window.destroy()
+    window.quit()
 
 window.protocol("WM_DELETE_WINDOW",quitevent)
 
