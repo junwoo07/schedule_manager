@@ -4,20 +4,26 @@ import tk_tools as tools
 import webbrowser
 import numpy as np
 
+def rowsave() :
+  with open("palette.dat",'w') as data :
+    for i in paletteboard.get()[:-1] :
+      data.write(i[0]+" | "+i[1]+"\n")
+    data.write(paletteboard.get()[-1][0]+" | "+paletteboard.get()[-1][1])
+  with open("board.dat","w") as data :
+    for i in colheaderentrys[:-1] :
+      data.write(i.get()+" | ")
+    data.write(colheaderentrys[-1].get())
+    temp = np.transpose(np.array(gateways))
+    for i in enumerate(temp) :
+      data.write("\n"+rowheaderentrys[i[0]].get())
+      for j in i[1] :
+        data.write(" | "+j.get())
 
 def save(event=None) :
   if event == None :
-    with open("palette.txt",'w') as data :
-      for i in paletteboard.get()[:-1] :
-        data.write(i[0]+" | "+i[1]+"\n")
-      data.write(paletteboard.get()[-1][0]+" | "+paletteboard.get()[-1][1])
-      print("saved")
+    rowsave()
   elif event.state == 12 :
-    with open("palette.txt",'w') as data :
-      for i in paletteboard.get()[:-1] :
-        data.write(i[0]+" | "+i[1]+"\n")
-      data.write(paletteboard.get()[-1][0]+" | "+paletteboard.get()[-1][1])
-      print("saved")
+    rowsave()
 
 Chrome_Path = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s"
 
