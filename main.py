@@ -36,13 +36,13 @@ colheader = []
 board = []
 palette = {}
 
-with open("palette.txt") as data :
+with open("palette.dat") as data :
   temp = data.read().splitlines()
   for i in temp :
     p = i.split(" | ")
     palette[p[0]] = p[1]
 
-with open("board.txt") as data :
+with open("board.dat") as data :
   temp = data.read().splitlines()
   colheader = temp[0].split(" | ")
   temp = temp[1:]
