@@ -1,3 +1,4 @@
+import tkinter
 from tkinter import *
 from tkinter import ttk
 import tk_tools as tools
@@ -107,5 +108,18 @@ for i in palette.keys() :
 Button(window,text="Save",command=save).place(width=60,height=30)
 window.bind("<s>",save)
 
+def quitevent() :
+  try :
+    ask = tkinter.messagebox.askyesnocancel(title="It is Not Saved!", message="Do you want save it?")
+    print(ask)
+  except Exception as e :
+    print(e)
+  finally :
+    window.destroy()
+    window.quit()
+
+
+
+window.protocol("WM_DELETE_WINDOW",quitevent)
 
 window.mainloop()
