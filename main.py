@@ -24,7 +24,7 @@ def exitlogin() :
 def submitcommand(event=None) :
   global userid
   userid = identry.get()
-  if os.path.isdir(f'{userid}') :
+  if os.path.isdir(f'Save\\{userid}') :
     login_window.destroy()
     login_window.quit()
   else :
