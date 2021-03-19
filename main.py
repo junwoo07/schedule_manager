@@ -77,7 +77,6 @@ window = Tk()
 window.title("schedule_manager")
 window.resizable(False,False)
 window.geometry('900x500')
-window.iconbitmap("icon.ico")
 
 
 rowheader = []
