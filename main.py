@@ -75,6 +75,7 @@ Chrome_Path = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s"
 
 window = Tk()
 window.title("schedule_manager")
+window.iconbitmap("icon.ico")
 window.resizable(False,False)
 window.geometry('900x500')
 
