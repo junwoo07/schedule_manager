@@ -1,0 +1,9 @@
+1.로그인에서 없는 아이디를 입력할 경우 새로운 schedule_board(시간표) 가 만들어진다.
+
+2.AddOption을 눌러서 팔렛트를 추가하고 팔렛트에 "name" "url" 순으로 적어 넣으면 된다.
+
+3.주어진 schedule_board(시간표)에는 "name"중에 입력할 수 있다.
+
+4.주어진 schedule_board(시간표)를 우클릭하면 "name"에 해당하는 "url"을 열게 된다.
+
+5."Save"(Ctrl+s)를 누르면 schedule_board(시간표)를 저장할 수 있다.

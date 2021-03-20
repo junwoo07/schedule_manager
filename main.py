@@ -77,7 +77,7 @@ window = Tk()
 window.title("schedule_manager")
 window.iconbitmap("icon.ico")
 window.resizable(False,False)
-window.geometry('900x500')
+window.geometry('1000x500')
 
 
 rowheader = []
@@ -145,13 +145,14 @@ for j in range(len(rowheader)) :
   rowheaderentrys[j].place(x=0,y=j*30+30,width=60,height=30)
 
 def addoption() :
-  paletteboard.add(["",""])
-  for gates in gateways :
-    for gate in gates :
-      gate["values"] = list(np.transpose(np.array(paletteboard.get()))[0])
+  if len(paletteboard.get()) < 24 :
+    paletteboard.add(["",""])
+    for gates in gateways :
+      for gate in gates :
+        gate["values"] = list(np.transpose(np.array(paletteboard.get()))[0])
 
 paletteboard = tools.MultiSlotFrame(window,2)
-paletteboard.place(x=i*90+150,y=0)
+paletteboard.place(x=0,y=len(rowheader)*30+30)
 Button(window,text="AddOption",command=addoption).place(x=i*90+465,y=0)
 for i in palette.keys() :
   paletteboard.add([i,palette[i]])
@@ -160,7 +161,7 @@ Button(window,text="Save",command=save).place(width=60,height=30)
 window.bind("<s>",save)
 
 def quitevent() :
-  ask = messagebox.askyesnocancel(title="It's not Saved!",message="Will you Save it?",icon='warning')
+  ask = messagebox.askyesnocancel(title="Wait!",message="Will you Save it?",icon='warning')
   if ask == True :
     save()
     window.destroy()
